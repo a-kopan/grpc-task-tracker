@@ -4,7 +4,7 @@ package task;
 
 service TaskManager {
     rpc GetTask (GetTaskRequest) returns (Task);
-    rpc CreateTask (Task) returns (GetTaskRequest);
+    rpc CreateTask (CreateTaskRequest) returns (GetTaskRequest);
     rpc ListTasks(ListTaskRequest) returns (ListTasksResponse);
 }
 
@@ -15,7 +15,7 @@ message ListTasksResponse {
 }
 
 message CreateTaskRequest {
-    Task task = 1;
+    string title = 1;
 }
 
 message GetTaskRequest {
