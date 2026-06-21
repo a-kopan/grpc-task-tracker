@@ -219,3 +219,6 @@ __marimo__/
 
 # Protoc generated files
 task_pb2*
+
+# sqlite database
+tasks.db

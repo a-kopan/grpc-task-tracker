@@ -13,7 +13,7 @@ class Task(Base):
     completed = Column(Boolean, nullable=True, default=False)
     
 def engine():
-    engine = create_engine("sqlite://", echo=True)
+    engine = create_engine("sqlite:///tasks.db", echo=True)
     Base.metadata.create_all(engine)
     return engine
 
@@ -50,6 +50,7 @@ def create_task(engine, task: Task):
     with Session(engine) as session:
         q = insert(Base.metadata.tables["Tasks"]).values(title = task.title, completed = False)
         result = session.execute(q)
+        session.commit()
     return result
 
 def list_tasks(engine):
