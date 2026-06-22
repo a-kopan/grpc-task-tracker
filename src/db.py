@@ -1,5 +1,5 @@
 from sqlalchemy import Column, Integer, String, Boolean
-from sqlalchemy import select, insert
+from sqlalchemy import select, insert, update
 from sqlalchemy.orm import DeclarativeBase, Session
 from sqlalchemy import create_engine
 
@@ -65,3 +65,9 @@ def is_empty(engine):
         q = select(Task)
         result = session.scalars(q).all()
     return len(result)==0
+
+def mark_completed(engine, id: int):
+    with Session(engine) as session:
+        task = session.get(Task, id)
+        task.completed = True
+        session.commit()

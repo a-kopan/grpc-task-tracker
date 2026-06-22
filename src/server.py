@@ -32,6 +32,17 @@ class Server(task_pb2_grpc.TaskManagerServicer):
             
         return task_pb2.ListTasksResponse(tasks=proto_tasks)
     
+    def MarkAsCompleted(self, request, context):
+        db_results = get_task(self.engine, request.id)
+        
+        if not db_results:
+            context.abort(grpc.StatusCode.NOT_FOUND, "Task not found")
+        
+        mark_completed(self.engine, db_results[0].id)
+
+        return task_pb2.MarkAsCompletedResponse()
+
+    
 def serve():
     server = grpc.server(futures.ThreadPoolExecutor(max_workers=10))
     

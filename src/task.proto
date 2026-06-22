@@ -6,6 +6,7 @@ service TaskManager {
     rpc GetTask (GetTaskRequest) returns (Task);
     rpc CreateTask (CreateTaskRequest) returns (GetTaskRequest);
     rpc ListTasks(ListTaskRequest) returns (ListTasksResponse);
+    rpc MarkAsCompleted(MarkAsCompletedRequest) returns (MarkAsCompletedResponse);
 }
 
 message ListTaskRequest {}
@@ -27,3 +28,9 @@ message Task {
     string title = 2;
     bool completed = 3;
 }
+
+message MarkAsCompletedRequest {
+    int32 id = 1;
+}
+
+message MarkAsCompletedResponse {}

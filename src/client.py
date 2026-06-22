@@ -22,6 +22,10 @@ def run():
         all_tasks = stub.ListTasks(list_req)
         print("All tasks:")
         [print(f"- {task}") for task in all_tasks.tasks]
-    
+
+        print("----Mark First Task as Completed----")
+        mark_req = task_pb2.MarkAsCompletedRequest(id=0)
+        stub.MarkAsCompleted(mark_req)
+
 if __name__=="__main__":
     run()
