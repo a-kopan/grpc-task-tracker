@@ -26,12 +26,12 @@
 python -m grpc_tools.protoc -I. --python_out=. --grpc_python_out=. task.proto
 ```
 
-## Usage
+## Usage - run from project root folder
 1. Start the server
 ```bash
-python server.py
+python src/server.py
 ```
 2. Run the Client
 ```bash
-python client.py
+python src/client.py
 ```
