@@ -60,3 +60,8 @@ def list_tasks(engine):
         titles = [task.title for task in results]
     return titles
         
+def is_empty(engine):
+    with Session(engine) as session:
+        q = select(Task)
+        result = session.scalars(q).all()
+    return len(result)==0

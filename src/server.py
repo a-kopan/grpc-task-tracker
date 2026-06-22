@@ -2,7 +2,7 @@ import grpc
 from concurrent import futures
 import task_pb2
 import task_pb2_grpc
-from db import engine, populate_db, get_task, create_task, list_tasks
+from db import *
 from db import Task as DbTask
 
 class Server(task_pb2_grpc.TaskManagerServicer):
@@ -37,8 +37,8 @@ def serve():
     
     my_server = Server()
     task_pb2_grpc.add_TaskManagerServicer_to_server(my_server, server)
-    
-    #populate_db(my_server.engine)
+    if is_empty(my_server.engine): 
+        populate_db(my_server.engine)
     server.add_insecure_port('[::]:50051')
     server.start()
     print("Server started on port 50051. Waiting for client...")
